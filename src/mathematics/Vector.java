@@ -22,6 +22,12 @@ public class Vector extends ArrayList<Double> {
         }
         return dotProduct;
     }
+
+    /**
+     * Vector addition
+     * @param v the vector the instance is added to
+     * @return The summation of the two vectors
+     */
     public Vector plus(Vector v){
         Vector acc = new Vector();
         for( int i = 0; i < v.size(); i++){
@@ -29,6 +35,12 @@ public class Vector extends ArrayList<Double> {
         }
         return acc;
     }
+
+    /**
+     * Vector subtraction
+     * @param v subtracts the values of the class instance with the vector passed in
+     * @return subtracted Vector
+     */
     public Vector minus(Vector v){
         Vector acc = new Vector();
         for( int i = 0; i < v.size(); i++){
@@ -36,6 +48,11 @@ public class Vector extends ArrayList<Double> {
         }
         return acc;
     }
+
+    /**
+     * A deep copy of the current vector
+     * @return a newly copied vector
+     */
     public Vector copy(){
         Vector toReturn = new Vector();
         for(int i = 0; i < size(); i++){

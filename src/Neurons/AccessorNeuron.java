@@ -1,6 +1,5 @@
 package Neurons;
 
-import com.sun.webpane.sg.Accessor;
 import mathematics.Sigmoid;
 import mathematics.Vector;
 
@@ -21,7 +20,7 @@ public class AccessorNeuron implements Neuron{
     public AccessorNeuron(){
 
     }
-    AccessorNeuron(float bias){
+    public AccessorNeuron(float bias){
         this.bias = bias;
     }
     public void assignWeight(float weight, int index){

@@ -17,7 +17,7 @@ public class TestNeuron {
         InputNeuron i2 = new InputNeuron(1);
         InputNeuron i3 = new InputNeuron(1);
 
-        AccessorNeuron o1 = new AccessorNeuron();
+        AccessorNeuron o1 = new AccessorNeuron(threshold);
 
         o1.addNeuron(i1);
         o1.addNeuron(i2);
@@ -27,7 +27,9 @@ public class TestNeuron {
         o1.assignWeight(w2, 1);
         o1.assignWeight(w3, 2);
 
+
         float result = o1.compute();
         System.out.println(result);
+
     }
 }

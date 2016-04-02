@@ -21,7 +21,7 @@ public class AccessorNeuron implements Neuron{
 
     }
     public AccessorNeuron(float bias){
-        this.bias = bias;
+        this.bias = -bias;
     }
     public void assignWeight(float weight, int index){
         if(index >= weights.size()){

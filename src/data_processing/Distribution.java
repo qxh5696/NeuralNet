@@ -18,6 +18,8 @@ public abstract class Distribution {
         this.indices = new ArrayList<>();
     }
 
+
+
     public List<DistributionIndex> getIndices() {
         return indices;
     }

@@ -2,6 +2,7 @@ package Neurons;
 
 import mathematics.Vector;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
@@ -9,7 +10,7 @@ import java.util.Random;
 /**
  * Created by Nicholas on 4/2/2016.
  */
-public class NeuralNet {
+public class NeuralNet implements Serializable {
     Random rand = new Random();
     private ArrayList<InputNeuron> in = new ArrayList<>();//List of input neurons
     private ArrayList<AccessorNeuron> out = new ArrayList<>();//List of output neurons

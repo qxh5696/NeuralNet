@@ -10,6 +10,6 @@ public class Sigmoid implements Function
 {
     @Override
     public double calculate(double in) {
-        return 1f/((double) Math.exp(-in)+1);
+        return 1f/(Math.exp(-in)+1);
     }
 }

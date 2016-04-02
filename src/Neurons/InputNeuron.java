@@ -12,7 +12,9 @@ public class InputNeuron implements Neuron{
     public InputNeuron(float value){
         this.value = value;
     }
-
+    public void setValue(float value){
+        this.value = value;
+    }
     @Override
     public float compute() {
         return value;

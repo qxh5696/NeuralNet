@@ -19,7 +19,11 @@ public class AccessorNeuron implements Neuron{
 
 
     public void assignWeight(float weight, int index){
-        weights.set(index, weight);
+        if(index >= weights.size()){
+            weights.add(weight);
+        }else {
+            weights.set(index, weight);
+        }
     }
 
     /**

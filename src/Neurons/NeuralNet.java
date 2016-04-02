@@ -126,13 +126,13 @@ public class NeuralNet {
 
     /**
      * Updates the weights of all the neurons
-     * @param input  a vector containing the parameters to the function
+     * @param input a vector containing the parameters to the function
      * @param expected Expected output of computation
      */
-    private void updateWeight(ArrayList<Vector> values, ArrayList<Vector> expected){
+    private void updateWeight(ArrayList<Vector> input, ArrayList<Vector> expected){
         for(Neuron n: neurons){
             if(n instanceof AccessorNeuron){
-                updateWeight(values, expected, (AccessorNeuron) n);
+                updateWeight(input, expected, (AccessorNeuron) n);
             }
         }
     }

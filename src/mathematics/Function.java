@@ -5,6 +5,15 @@ import java.util.ArrayList;
 /**
  * Created by qadirhaqq on 4/1/16.
  */
+
+/**
+ * A basic stratagy interface for Functions
+ */
 public interface Function {
-    public double calculate(double in);
+    /**
+     * calculates the function
+     * @param in the input to the function
+     * @return the output of the function
+     */
+    double calculate(double in);
 }

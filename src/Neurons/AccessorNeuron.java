@@ -3,16 +3,19 @@ package Neurons;
 import mathematics.Sigmoid;
 import mathematics.Vector;
 
+
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by qadirhaqq on 4/1/16.
  */
-public class HiddenNeuron implements Neuron{
+public class AccessorNeuron implements Neuron{
+    private Random rand = new Random();
     private Vector weights = new Vector();
     private ArrayList<Neuron> inputs = new ArrayList<>();
-    private float bias = (float) -Math.random();
-
+    private float bias = -rand.nextFloat() * 50; //TODO if broken, change value
+    private Sigmoid activation = new Sigmoid();
 
 
     public void assignWeight(float weight, int index){
@@ -24,7 +27,7 @@ public class HiddenNeuron implements Neuron{
      * into this Neuron
      * @return
      */
-    private Vector getInput(){
+    private Vector getInputValues(){
         Vector toReturn = new Vector();
         for(Neuron v: inputs){
             toReturn.add(v.compute());
@@ -32,13 +35,25 @@ public class HiddenNeuron implements Neuron{
         return toReturn;
     }
 
-
     /**
-     * C
+     * Computes a Sigmoid activation value
      * @return
      */
     public float compute() {
-        Sigmoid s = new Sigmoid();
-        return s.calculate(getInput().dotProduct(weights));
+        return activation.calculate(getInputValues().dotProduct(weights)) + bias;
     }
+
+    public void addNeuron(Neuron n){
+        inputs.add(n);
+    }
+
+    public Neuron getNeuron(int i){
+        return inputs.get(i);
+    }
+
+    public ArrayList<Neuron> getNeuron(){
+        return inputs;
+    }
+
+
 }

@@ -57,4 +57,5 @@ public abstract class Distribution {
             this.indices.add(distributionIndex);
         }
     }
+
 }

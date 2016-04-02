@@ -34,9 +34,9 @@ public class NeuralNet {
         }
         return output;
     }
-    private float cost(ArrayList<Vector> values, ArrayList<Vector> expected){
+    private double cost(ArrayList<Vector> values, ArrayList<Vector> expected){
         int size = values.size();
-        float total = 0;
+        double total = 0;
         for(int i = 0; i <values.size(); i++){
             Vector output = calculate(values.get(i));
             Vector innerDot = output.minus(expected.get(i));
@@ -44,28 +44,28 @@ public class NeuralNet {
         }
         return total/(2*size);
     }
-    private float DcostDw(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n, int i){
-        float cost1 = cost(values, expected);
-        float oldWeight = n.getWeight(i);
-        float delta = 0.01f;
+    private double DcostDw(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n, int i){
+        double cost1 = cost(values, expected);
+        double oldWeight = n.getWeight(i);
+        double delta = 0.01f;
         n.assignWeight(oldWeight+delta, i);
-        float cost2 = cost(values, expected);
+        double cost2 = cost(values, expected);
         n.assignWeight(oldWeight, i);
         return (cost2-cost1)/delta;
     }
-    private float DcostDb(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n){
-        float cost1 = cost(values, expected);
-        float oldBias = n.getBias();
-        float delta = 0.01f;
+    private double DcostDb(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n){
+        double cost1 = cost(values, expected);
+        double oldBias = n.getBias();
+        double delta = 0.01f;
         n.setBias(oldBias + delta);
-        float cost2 = cost(values, expected);
+        double cost2 = cost(values, expected);
         n.setBias(oldBias);
         return (cost2-cost1)/delta;
     }
     private void updateWeight(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n){
-        float eta = 0.1f;
+        double eta = 0.1f;
         for(int i = 0; i < n.getSizeInputs(); i++){
-            float newWeight = n.getWeight(i)-eta*DcostDw(values, expected, n, i);
+            double newWeight = n.getWeight(i)-eta*DcostDw(values, expected, n, i);
             n.assignWeight(newWeight, i);
         }
     }
@@ -77,8 +77,8 @@ public class NeuralNet {
         }
     }
     private void updateBias(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n){
-        float eta = 0.1f;
-        float newBias = n.getBias()-eta*DcostDb(values, expected, n);
+        double eta = 0.1f;
+        double newBias = n.getBias()-eta*DcostDb(values, expected, n);
         n.setBias(newBias);
     }
     private void updateBias(ArrayList<Vector> values, ArrayList<Vector> expected){

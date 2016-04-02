@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Sigmoid implements Function
 {
     @Override
-    public float calculate(Float in) {
-        return 1f/((float) Math.exp(-in)+1);
+    public double calculate(double in) {
+        return 1f/((double) Math.exp(-in)+1);
     }
 }

@@ -14,13 +14,13 @@ public class AccessorNeuron implements Neuron{
     private Random rand = new Random();
     private Vector weights = new Vector();
     private ArrayList<Neuron> inputs = new ArrayList<>();
-    private float bias = -rand.nextFloat() * 50; //TODO if broken, change value
+    private double bias = -rand.nextDouble() * 50; //TODO if broken, change value
     private Sigmoid activation = new Sigmoid();
 
     public AccessorNeuron(){
 
     }
-    public AccessorNeuron(float bias){
+    public AccessorNeuron(double bias){
         this.bias = -bias;
     }
     public int getIndex(Neuron n){
@@ -34,16 +34,16 @@ public class AccessorNeuron implements Neuron{
     public int getSizeInputs(){
         return inputs.size();
     }
-    public float getWeight(int i){
+    public double getWeight(int i){
         return weights.get(i);
     }
-    public float getBias(){
+    public double getBias(){
         return bias;
     }
-    public void setBias(float i){
+    public void setBias(double i){
         bias = i;
     }
-    public void assignWeight(float weight, int index){
+    public void assignWeight(double weight, int index){
         if(index >= weights.size()){
             weights.add(weight);
         }else {
@@ -68,7 +68,7 @@ public class AccessorNeuron implements Neuron{
      * Computes a Sigmoid activation value
      * @return
      */
-    public float compute() {
+    public double compute() {
         return activation.calculate(getInputValues().dotProduct(weights)+ bias) ;
     }
 
@@ -89,7 +89,7 @@ public class AccessorNeuron implements Neuron{
      * @param n The neuron
      * @param weight The weight of the neuron
      */
-    public void addNeuron(Neuron n, float weight){
+    public void addNeuron(Neuron n, double weight){
         inputs.add(n);
         weights.add(weight);
     }

@@ -8,5 +8,5 @@ public interface Neuron {
      * Gets the value of the neuron (applies the
      * @return
      */
-    public float compute();
+    public double compute();
 }

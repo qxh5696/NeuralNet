@@ -13,9 +13,9 @@ public class TestNeuron {
         float threshold = 5;
 
 
-        InputNeuron i1 = new InputNeuron(1);
-        InputNeuron i2 = new InputNeuron(0);
-        InputNeuron i3 = new InputNeuron(0);
+        InputNeuron i1 = new InputNeuron(0);
+        InputNeuron i2 = new InputNeuron(1);
+        InputNeuron i3 = new InputNeuron(1);
 
         AccessorNeuron o1 = new AccessorNeuron();
 

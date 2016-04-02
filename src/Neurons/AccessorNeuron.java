@@ -1,5 +1,6 @@
 package Neurons;
 
+import com.sun.webpane.sg.Accessor;
 import mathematics.Sigmoid;
 import mathematics.Vector;
 
@@ -14,10 +15,15 @@ public class AccessorNeuron implements Neuron{
     private Random rand = new Random();
     private Vector weights = new Vector();
     private ArrayList<Neuron> inputs = new ArrayList<>();
-    private float bias = 0;//-rand.nextFloat() * 50; //TODO if broken, change value
+    private float bias = -rand.nextFloat() * 50; //TODO if broken, change value
     private Sigmoid activation = new Sigmoid();
 
+    public AccessorNeuron(){
 
+    }
+    AccessorNeuron(float bias){
+        this.bias = bias;
+    }
     public void assignWeight(float weight, int index){
         if(index >= weights.size()){
             weights.add(weight);

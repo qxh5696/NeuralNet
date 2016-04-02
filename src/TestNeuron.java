@@ -94,8 +94,8 @@ public class TestNeuron {
 
         Vector input = new Vector();
         //net.calculate(input);
-        input.add(0.0);
-        input.add(0.0);
+        input.add(1.0);
+        input.add(1.0);
         input.add(0.0);
 
         o1.addNeuron(i1);

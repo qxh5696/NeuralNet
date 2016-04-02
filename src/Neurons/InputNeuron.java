@@ -5,9 +5,10 @@ package Neurons;
  */
 public class InputNeuron implements Neuron{
     private double value;
+
     /**
-     * The input neuron to compute
-     * @param value
+     * Constructor for an InputNeuron
+     * @param value - Value of the input neuron
      */
     public InputNeuron(double value){
         this.value = value;
@@ -15,6 +16,11 @@ public class InputNeuron implements Neuron{
     public void setValue(double value){
         this.value = value;
     }
+
+    /**
+     * Compute function
+     * @return The value of the input
+     */
     @Override
     public double compute() {
         return value;

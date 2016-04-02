@@ -16,7 +16,7 @@ public class TestNeuron {
         NeuralNet net = new NeuralNet();
         net.addNeurons(3,5,3);
         Vector input = new Vector();
-        System.out.println("Result 1 (Neural Net) before iterations: " + net.calculate(input).get(0));
+
 
         ArrayList<Vector> inputs = new ArrayList<>();
         ArrayList<Vector> expected = new ArrayList<>();
@@ -71,6 +71,13 @@ public class TestNeuron {
         inputs.add(input.copy());
         input.clear();
 
+        input.add(1.0);//weather
+        input.add(1.0);//wife
+        input.add(1.0);//transportation
+
+
+
+
         Vector output = new Vector();
         output.add(0.0);
         expected.add(output.copy());
@@ -96,7 +103,10 @@ public class TestNeuron {
         output.add(1.0);
         expected.add(output.copy());
         output.clear();
-        for(int i = 0; i < 1000; i++) {
+
+        System.out.println("Result 1 (Neural Net) before iterations: " + net.calculate(input).get(0));
+
+        for(int i = 0; i < 10000; i++) {
             net.update(inputs, expected);
         }
 //        //Cheese festival conundrum

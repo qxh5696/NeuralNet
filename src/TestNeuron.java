@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class TestNeuron {
 
     public static void main(String[] args) {
+
         double threshold = 0;
-
-
+        /*
         InputNeuron i1 = new InputNeuron(1);//A
         InputNeuron i2 = new InputNeuron(1);//B
 
@@ -73,5 +73,48 @@ public class TestNeuron {
         input.add(1.0);
         System.out.println("Result 1 (Neural Net): "+net.calculate(input).get(0) + "," + "Result 2 (Neural Net): " + net.calculate(input).get(1));
         System.out.println("Result 1: " + result1 + " Result 2: " + result2 );
+        */
+
+        InputNeuron i1 = new InputNeuron(1);
+        InputNeuron i2 = new InputNeuron(0);
+        InputNeuron i3 = new InputNeuron(0);
+
+        AccessorNeuron o1 = new AccessorNeuron(threshold);
+        //AccessorNeuron o2 = new AccessorNeuron(threshold);
+
+        NeuralNet net = new NeuralNet();
+
+        net.addInNeuron(i1);
+        net.addInNeuron(i2);
+        net.addInNeuron(i3);
+        net.addOutNeuron(o1);
+
+        //net.addOutNeuron(o2);
+
+
+        Vector input = new Vector();
+        //net.calculate(input);
+        input.add(0.0);
+        input.add(0.0);
+        input.add(0.0);
+
+        o1.addNeuron(i1);
+        o1.addNeuron(i2);
+        o1.addNeuron(i3);
+
+        o1.assignWeight(6,0);
+        o1.assignWeight(2,1);
+        o1.assignWeight(2,2);
+
+        //System.out.println();
+
+        //System.out.println("Input size: " + input.size());
+
+        //double result1 = o1.compute();
+        //double result2 = o2.compute();
+
+
+        System.out.println("Result 1 (Neural Net): "+ net.calculate(input).get(0));
+        //System.out.println("Result 1: " + result1 /*+ " Result 2: " + result2 */);
     }
 }

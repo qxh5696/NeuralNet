@@ -27,6 +27,8 @@ public class NeuralNet {
     public Vector calculate(Vector input){
         for(int i = 0; i < in.size(); i++){
             in.get(i).setValue(input.get(i));
+            //out.get(0).addNeuron(in.get(i));
+            //TODO must add some way to
         }
         Vector output = new Vector();
         for(int i = 0; i < out.size(); i++){

@@ -1,5 +1,6 @@
 package data_processing;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public abstract class Distribution {
         this.highBound = highBound;
         this.lowBound = lowBound;
         this.numOfIndices = numOfIndices;
+        this.indices = new ArrayList<>();
     }
 
     public List<DistributionIndex> getIndices() {
@@ -46,5 +48,13 @@ public abstract class Distribution {
 
     public void setNumOfIndices(int numOfIndices) {
         this.numOfIndices = numOfIndices;
+    }
+
+    public void calculateIndices(){
+        double modifier = (highBound-lowBound)/numOfIndices;
+        for (int i = 0; i<numOfIndices; i++){
+            DistributionIndex distributionIndex = new DistributionIndex((i*modifier),modifier* (i+1));
+            this.indices.add(distributionIndex);
+        }
     }
 }

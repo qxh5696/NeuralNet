@@ -6,7 +6,7 @@ package data_processing;
 public class DistributionIndex {
     private double high,low;
 
-    public DistributionIndex(double high, double low) {
+    public DistributionIndex(double low, double high) {
         this.high = high;
         this.low = low;
     }
@@ -25,5 +25,9 @@ public class DistributionIndex {
 
     public void setLow(double low) {
         this.low = low;
+    }
+
+    public boolean test(double tester){
+        return tester<=high && tester >= low;
     }
 }

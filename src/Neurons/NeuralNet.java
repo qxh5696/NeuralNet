@@ -39,14 +39,16 @@ public class NeuralNet {
     }
 
     /**
-     * Computation of determinant
-     * @param input Input Vector to take as a parameter
-     * @return Output vector to return
+     * Evaluates the neural net
+     * @param input a vector containing the parameters to the neural net
+     * @return Output the output of the neural net
      */
     public Vector calculate(Vector input){
+        //set all of the input neurons to the parameters' values
         for(int i = 0; i < in.size(); i++){
             in.get(i).setValue(input.get(i));
         }
+        //calculate each of the output values
         Vector output = new Vector();
         for(int i = 0; i < out.size(); i++){
             output.add(out.get(i).compute());
@@ -56,15 +58,15 @@ public class NeuralNet {
 
     /**
      * The Cost to minimize using the Gradient Descent formula
-     * @param values Sample input passed in through test file
-     * @param expected Expected output passed in through test file
-     * @return The minimum we can change our values by and still remain within range of our expected output
+     * @param input the input to the neural net
+     * @param expected Expected output of computation
+     * @return a heuristic of how well the model fit
      */
-    private double cost(ArrayList<Vector> values, ArrayList<Vector> expected){
-        int size = values.size();
+    private double cost(ArrayList<Vector> input, ArrayList<Vector> expected){
+        int size = input.size();
         double total = 0;
-        for(int i = 0; i <values.size(); i++){
-            Vector output = calculate(values.get(i));
+        for(int i = 0; i <input.size(); i++){
+            Vector output = calculate(input.get(i));
             Vector innerDot = output.minus(expected.get(i));
             total += innerDot.dotProduct(innerDot);
         }
@@ -73,57 +75,59 @@ public class NeuralNet {
 
     /**
      * Change in cost function with respect to the bias
-     * @param values Sample input passed in through test file
-     * @param expected Expected output passed in through test file
-     * @param n Neuron obtained through the for-loo
+     * @param input  a vector containing the parameters to the function
+     * @param expected Expected output of computation
+     * @param n the neuron who's weight to change
      * @param i Index of the weight
      * @return The derivative of the cost with respect to the Weight
      */
-    private double DcostDw(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n, int i){
-        double cost1 = cost(values, expected);
+    private double DcostDw(ArrayList<Vector> input, ArrayList<Vector> expected, AccessorNeuron n, int i){
+        double cost1 = cost(input, expected);
+        //we store the old weight so we can revert
         double oldWeight = n.getWeight(i);
-        double delta = 0.01f;
+        //the small change in x
+        double delta = 0.01;
         n.assignWeight(oldWeight+delta, i);
-        double cost2 = cost(values, expected);
+        double cost2 = cost(input, expected);
         n.assignWeight(oldWeight, i);
         return (cost2-cost1)/delta;
     }
 
     /**
      * Change in the cost function with respect to the bias
-     * @param values Sample input passed in through test file
-     * @param expected Expected output passed in through test file
+     * @param input  a vector containing the parameters to the function
+     * @param expected Expected output of computation
      * @param n Neuron to update
      * @return The derivative of the cost with respect to the Bias
      */
-    private double DcostDb(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n){
-        double cost1 = cost(values, expected);
+    private double DcostDb(ArrayList<Vector> input, ArrayList<Vector> expected, AccessorNeuron n){
+        double cost1 = cost(input, expected);
         double oldBias = n.getBias();
         double delta = 0.01f;
         n.setBias(oldBias + delta);
-        double cost2 = cost(values, expected);
+        double cost2 = cost(input, expected);
         n.setBias(oldBias);
         return (cost2-cost1)/delta;
     }
 
     /**
-     * Update the weight of an individual node
-     * @param values Sample input passed in through test file
-     * @param expected Expected output passed in through test file
-     * @param n Neuron obtained through the for-loop
+     * Update all the weight of an individual node
+     * @param input  a vector containing the parameters to the function
+     * @param expected Expected output of computation
+     * @param n the neurons who's weight to change
      */
-    private void updateWeight(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n){
+    private void updateWeight(ArrayList<Vector> input, ArrayList<Vector> expected, AccessorNeuron n){
         double eta = 10f;
         for(int i = 0; i < n.getSizeInputs(); i++){
-            double newWeight = n.getWeight(i)-eta*DcostDw(values, expected, n, i);
+            double newWeight = n.getWeight(i)-eta*DcostDw(input, expected, n, i);
             n.assignWeight(newWeight, i);
         }
     }
 
     /**
-     * Updates the weights of the neurons in the neuron list
-     * @param values Sample input passed in through test file
-     * @param expected Expected output passed in through test file
+     * Updates the weights of all the neurons
+     * @param input  a vector containing the parameters to the function
+     * @param expected Expected output of computation
      */
     private void updateWeight(ArrayList<Vector> values, ArrayList<Vector> expected){
         for(Neuron n: neurons){
@@ -135,33 +139,34 @@ public class NeuralNet {
 
     /**
      * Update the bias of an individual neuron
-     * @param values Sample input
-     * @param expected Expected output
-     * @param n Neuron n
+     * @param input  a vector containing the parameters to the function
+     * @param expected Expected output of computation
+     * @param n The neuron who's basis to change
      */
-    private void updateBias(ArrayList<Vector> values, ArrayList<Vector> expected, AccessorNeuron n){
+    private void updateBias(ArrayList<Vector> input, ArrayList<Vector> expected, AccessorNeuron n){
         double eta = 10f;
-        double newBias = n.getBias()-eta*DcostDb(values, expected, n);
+        double newBias = n.getBias()-eta*DcostDb(input, expected, n);
         n.setBias(newBias);
     }
 
     /**
-     * Loops through the list of neurons and changes neurons based on updateBias function
-     * @param values The list of values input
-     * @param expected Expected output to try and map
+     * Loops through the list of neurons and changes all
+     * the neurons' basis using the updateBias function
+     * @param input  a vector containing the parameters to the function
+     * @param expected Expected output of computation
      */
-    private void updateBias(ArrayList<Vector> values, ArrayList<Vector> expected){
+    private void updateBias(ArrayList<Vector> input, ArrayList<Vector> expected){
         for(Neuron n: neurons){
             if(n instanceof AccessorNeuron){
-                updateBias(values, expected, (AccessorNeuron) n);
+                updateBias(input, expected, (AccessorNeuron) n);
             }
         }
     }
 
     /**
-     * "Trains" the neural net
-     * @param input Sample input given a problem
-     * @param expected Expected output given
+     * Trains the neural net with the given data
+     * @param input  a vector containing the parameters to the function
+     * @param expected Expected output of computation
      */
     public void update(ArrayList<Vector> input, ArrayList<Vector> expected){
         updateWeight(input,expected);

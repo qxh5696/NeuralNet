@@ -23,6 +23,8 @@ public class AccessorNeuron implements Neuron{
     public AccessorNeuron(float bias){
         this.bias = -bias;
     }
+
+
     public void assignWeight(float weight, int index){
         if(index >= weights.size()){
             weights.add(weight);
@@ -64,5 +66,15 @@ public class AccessorNeuron implements Neuron{
         return inputs;
     }
 
+    /**
+     * Assign a weight to an input value
+     * @param n The neuron
+     * @param weight The weight of the neuron
+     */
+    public void addNeuron(Neuron n, float weight){
+        inputs.add(n);
+        weights.add(weight);
+
+    }
 
 }

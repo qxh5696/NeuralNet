@@ -9,6 +9,6 @@ public class Sigmoid implements Function
 {
     @Override
     public float calculate(Float in) {
-        return 1f/((float) Math.exp(-in+1)+1);
+        return 1f/((float) Math.exp(-in)+1);
     }
 }

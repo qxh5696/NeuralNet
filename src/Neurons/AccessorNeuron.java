@@ -74,7 +74,6 @@ public class AccessorNeuron implements Neuron{
     public void addNeuron(Neuron n, float weight){
         inputs.add(n);
         weights.add(weight);
-
     }
 
 }

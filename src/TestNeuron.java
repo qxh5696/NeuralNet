@@ -1,5 +1,8 @@
 import Neurons.AccessorNeuron;
 import Neurons.InputNeuron;
+import Neurons.NeuralNet;
+
+import java.util.ArrayList;
 
 /**
  * Created by qadirhaqq on 4/2/16.
@@ -55,6 +58,19 @@ public class TestNeuron {
 
         float result1 = o1.compute();
         float result2 = o2.compute();
+
+        NeuralNet net = new NeuralNet();
+        net.addInNeuron(i1);
+        net.addInNeuron(i2);
+        net.addNeuron(h1);
+        net.addNeuron(h2);
+        net.addNeuron(h3);
+        net.addOutNeuron(o1);
+        net.addOutNeuron(o2);
+        ArrayList<Float> input = new ArrayList<Float>();
+        input.add(1f);
+        input.add(1f);
+        System.out.println("Result 1 (Neural Net): "+net.calculate(input).get(0) + "," + "Result 2 (Neural Net): " + net.calculate(input).get(1));
         System.out.println("Result 1: " + result1 + " Result 2: " + result2 );
 
     }

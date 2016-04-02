@@ -14,8 +14,9 @@ public class TestNeuron {
 
         double threshold = 1;
 
-        //Cheese festival conundrum
 
+        //Cheese festival conundrum
+        /*
         InputNeuron i1 = new InputNeuron(1);
         InputNeuron i2 = new InputNeuron(0);
         InputNeuron i3 = new InputNeuron(0);
@@ -122,12 +123,12 @@ public class TestNeuron {
         o1.assignWeight(1,1);
         o1.assignWeight(1,2);
 
-        input.add(1.0);
-        input.add(1.0);
-        input.add(1.0);
+        input.add(1.0);//Weather
+        input.add(1.0);//Wife
+        input.add(1.0);//Wardrobe (transportation)
+        */
 
 
-            /*
         NeuralNet net = new NeuralNet();
 
         InputNeuron i1 = new InputNeuron(1);
@@ -190,7 +191,7 @@ public class TestNeuron {
         expected.add(output.copy());
         output.clear();
 
-        output.add(1.0);
+        output.add(0.0);
         expected.add(output.copy());
         output.clear();
 
@@ -211,7 +212,7 @@ public class TestNeuron {
         input.add(1.0);
         input.add(1.0);
 
-        */
+
 
         int iterations = 10000;
 

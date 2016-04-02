@@ -172,4 +172,17 @@ public class NeuralNet {
         updateWeight(input,expected);
         updateBias(input,expected);
     }
+
+    /*public void createNetwork(ArrayList<Vector> input, ArrayList<Vector> expected){
+        int numHiddenNodes = (input.size() + expected.size())/2;
+        for(int i = 0; i < numHiddenNodes; i++){
+            AccessorNeuron hidden = new AccessorNeuron();
+            hidden.assignWeight();
+        }
+
+    }*/
+
+
+
+
 }

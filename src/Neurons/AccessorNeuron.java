@@ -14,7 +14,7 @@ public class AccessorNeuron implements Neuron{
     private Random rand = new Random();
     private Vector weights = new Vector();
     private ArrayList<Neuron> inputs = new ArrayList<>();
-    private float bias = -rand.nextFloat() * 50; //TODO if broken, change value
+    private float bias = 0;//-rand.nextFloat() * 50; //TODO if broken, change value
     private Sigmoid activation = new Sigmoid();
 
 
@@ -44,7 +44,7 @@ public class AccessorNeuron implements Neuron{
      * @return
      */
     public float compute() {
-        return activation.calculate(getInputValues().dotProduct(weights)) + bias;
+        return activation.calculate(getInputValues().dotProduct(weights)+ bias) ;
     }
 
     public void addNeuron(Neuron n){

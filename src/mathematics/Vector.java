@@ -25,18 +25,24 @@ public class Vector extends ArrayList<Double> {
     public Vector plus(Vector v){
         Vector acc = new Vector();
         for( int i = 0; i < v.size(); i++){
-            acc.add(v.get(i) + v.get(i));
+            acc.add(this.get(i) + v.get(i));
         }
         return acc;
     }
     public Vector minus(Vector v){
         Vector acc = new Vector();
         for( int i = 0; i < v.size(); i++){
-            acc.add(v.get(i) - v.get(i));
+            acc.add(this.get(i) - v.get(i));
         }
         return acc;
     }
-
+    public Vector copy(){
+        Vector toReturn = new Vector();
+        for(int i = 0; i < size(); i++){
+            toReturn.add(new Double(get(i).floatValue()));
+        }
+        return toReturn;
+    }
 
 
 }

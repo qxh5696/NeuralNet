@@ -12,7 +12,7 @@ public class TestNeuron {
 
     public static void main(String[] args) {
 
-        double threshold = 5;
+        double threshold = 1;
         /*
         InputNeuron i1 = new InputNeuron(1);//A
         InputNeuron i2 = new InputNeuron(1);//B
@@ -94,17 +94,94 @@ public class TestNeuron {
 
         Vector input = new Vector();
 
+        ArrayList<Vector> inputs = new ArrayList<>();
+        ArrayList<Vector> expected = new ArrayList<>();
+        input.add(0.0);
+        input.add(0.0);
+        input.add(0.0);
+        inputs.add(input.copy());
+
+        input.clear();
         input.add(1.0);
         input.add(0.0);
         input.add(0.0);
+        inputs.add(input.copy());
+
+        input.clear();
+        input.add(0.0);
+        input.add(1.0);
+        input.add(0.0);
+        inputs.add(input.copy());
+
+        input.clear();
+        input.add(1.0);
+        input.add(1.0);
+        input.add(0.0);
+        inputs.add(input.copy());
+
+
+        input.clear();
+        input.add(0.0);
+        input.add(0.0);
+        input.add(1.0);
+        inputs.add(input.copy());
+
+        input.clear();
+        input.add(1.0);
+        input.add(0.0);
+        input.add(1.0);
+        inputs.add(input.copy());
+
+
+        input.clear();
+        input.add(0.0);
+        input.add(1.0);
+        input.add(1.0);
+        inputs.add(input.copy());
+
+
+        input.clear();
+        input.add(1.0);
+        input.add(1.0);
+        input.add(1.0);
+        inputs.add(input.copy());
+        input.clear();
+
+        Vector output = new Vector();
+        output.add(0.0);
+        expected.add(output.copy());
+        output.clear();
+        output.add(1.0);
+        expected.add(output.copy());
+        output.clear();
+        output.add(0.0);
+        expected.add(output.copy());
+        output.clear();
+        output.add(1.0);
+        expected.add(output.copy());
+        output.clear();
+        output.add(0.0);
+        expected.add(output.copy());
+        output.clear();
+        output.add(1.0);
+        expected.add(output.copy());
+        output.clear();
+        output.add(0.0);
+        expected.add(output.copy());
+        output.clear();
+        output.add(1.0);
+        expected.add(output.copy());
+        output.clear();
+
+
 
         o1.addNeuron(i1);
         o1.addNeuron(i2);
         o1.addNeuron(i3);
 
-        o1.assignWeight(6,0);
-        o1.assignWeight(2,1);
-        o1.assignWeight(2,2);
+        o1.assignWeight(1,0);
+        o1.assignWeight(1,1);
+        o1.assignWeight(1,2);
 
         //System.out.println();
 
@@ -112,9 +189,15 @@ public class TestNeuron {
 
         //double result1 = o1.compute();
         //double result2 = o2.compute();
+        input.add(0.0);
+        input.add(1.0);
+        input.add(1.0);
+        System.out.println("Result 1 (Neural Net): " + net.calculate(input).get(0));
+        for(int i = 0; i < 1000; i++){
+             net.update(inputs,expected);
+        }
 
-
-        System.out.println("Result 1 (Neural Net): "+ net.calculate(input).get(0));
+        System.out.println("Result 1 (Neural Net): " + net.calculate(input).get(0));
         //System.out.println("Result 1: " + result1 /*+ " Result 2: " + result2 */);
     }
 }

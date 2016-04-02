@@ -3,8 +3,7 @@ package data_processing;
 /**
  * Created by Aaron on 4/2/2016.
  */
-import oscP5.src.oscP5.OscMessage;
-import oscP5.src.oscP5.OscP5;
+import oscP5.*;
 
 public class MuseOSCServer {
     static MuseOSCServer museOSCServer;

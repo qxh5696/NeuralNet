@@ -69,7 +69,7 @@ public class AccessorNeuron implements Neuron{
      * @return
      */
     public double compute() {
-        System.out.println("Input Values: " + getInputValues().toString());
+        //System.out.println("Input Values: " + getInputValues().toString());
         return activation.calculate(getInputValues().dotProduct(weights)+ bias) ;
     }
 

@@ -3,11 +3,14 @@ package Neurons;
 import mathematics.Vector;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * Created by Nicholas on 4/2/2016.
  */
 public class NeuralNet {
+    Random rand = new Random();
     private ArrayList<InputNeuron> in = new ArrayList<>();//List of input neurons
     private ArrayList<AccessorNeuron> out = new ArrayList<>();//List of output neurons
     private ArrayList<Neuron> neurons = new ArrayList<>();//List of all Neurons
@@ -87,7 +90,7 @@ public class NeuralNet {
         double oldWeight = n.getWeight(i);
         //the small change in x
         double delta = 0.01;
-        n.assignWeight(oldWeight+delta, i);
+             n.assignWeight(oldWeight+delta, i);
         double cost2 = cost(input, expected);
         n.assignWeight(oldWeight, i);
         return (cost2-cost1)/delta;
@@ -172,4 +175,55 @@ public class NeuralNet {
         updateWeight(input,expected);
         updateBias(input,expected);
     }
+    public LinkedList<AccessorNeuron> addHiddenNeuron(int n){
+        LinkedList<AccessorNeuron> layer = new LinkedList<>();
+        for(int i = 0; i < n; i++){
+            AccessorNeuron toAdd = new AccessorNeuron();
+            layer.add(toAdd);
+            neurons.add(toAdd);
+        }
+        return layer;
+    }
+    public LinkedList<AccessorNeuron> addOutputNeuron(int n){
+        LinkedList<AccessorNeuron> layer = new LinkedList<>();
+        for(int i = 0; i < n; i++){
+            AccessorNeuron toAdd = new AccessorNeuron();
+            layer.add(toAdd);
+            addOutNeuron(toAdd);
+        }
+        return layer;
+    }
+    public LinkedList<InputNeuron> addInputNeuron(int n){
+        LinkedList<InputNeuron> layer = new LinkedList<>();
+        for(int i = 0; i < n; i++){
+            InputNeuron toAdd = new InputNeuron(n);
+            layer.add(toAdd);
+            addInNeuron(toAdd);
+        }
+        return layer;
+    }
+    public void linkUp(LinkedList<Neuron> layer1, LinkedList<AccessorNeuron> layer2){
+        for(int i1 = 0; i1 < layer1.size(); i1++){
+            for(int i2 = 0; i2 < layer2.size(); i2++){
+                layer2.get(i2).addNeuron(layer1.get(i1),20*(rand.nextFloat()-0.5));
+            }
+        }
+    }
+
+    public void addNeurons(int inputNum, int hiddenNum, int outputNum){
+        LinkedList<InputNeuron> inLayer = addInputNeuron(inputNum);
+        LinkedList<AccessorNeuron> hiddenLayer = addHiddenNeuron(hiddenNum);
+        LinkedList<AccessorNeuron> outLayer = addOutputNeuron(outputNum);
+        LinkedList<Neuron> inLayerNeuron = new LinkedList<>();
+        for(InputNeuron in : inLayer){
+            inLayerNeuron.add(in);
+        }
+        LinkedList<Neuron> AccessorLayerNeuron = new LinkedList<>();
+        for(AccessorNeuron in : hiddenLayer){
+            AccessorLayerNeuron.add(in);
+        }
+        linkUp(inLayerNeuron,hiddenLayer);
+        linkUp(AccessorLayerNeuron,outLayer);
+    }
+
 }

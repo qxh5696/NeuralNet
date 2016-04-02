@@ -22,7 +22,20 @@ public class Vector extends ArrayList<Float> {
         }
         return dotProduct;
     }
-
+    public Vector plus(Vector v){
+        Vector acc = new Vector();
+        for( int i = 0; i < v.size(); i++){
+            acc.add(v.get(i) + v.get(i));
+        }
+        return acc;
+    }
+    public Vector minus(Vector v){
+        Vector acc = new Vector();
+        for( int i = 0; i < v.size(); i++){
+            acc.add(v.get(i) - v.get(i));
+        }
+        return acc;
+    }
 
 
 

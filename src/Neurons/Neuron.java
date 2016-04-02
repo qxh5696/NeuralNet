@@ -5,8 +5,8 @@ package Neurons;
  */
 public interface Neuron {
     /**
-     * Gets the value of the neuron (applies the
-     * @return
+     * Gets the value of the neuron, applying appropriate compute function
+     * @return Correct computational value of Neuron
      */
     public double compute();
 }

@@ -7,13 +7,13 @@ import java.util.ArrayList;
  */
 
 /**
- * A basic stratagy interface for Functions
+ * A basic strategy interface for Functions
  */
 public interface Function {
     /**
-     * calculates the function
-     * @param in the input to the function
-     * @return the output of the function
+     * Calculate function for implementation of NeuralNet
+     * @param in the input to the function (e.g, sigmoid function computed using "in")
+     * @return Result of function
      */
     double calculate(double in);
 }

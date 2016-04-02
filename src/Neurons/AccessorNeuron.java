@@ -23,8 +23,26 @@ public class AccessorNeuron implements Neuron{
     public AccessorNeuron(float bias){
         this.bias = -bias;
     }
-
-
+    public int getIndex(Neuron n){
+        for(int i = 0; i < inputs.size(); i++){
+            if(inputs.get(i) == n){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int getSizeInputs(){
+        return inputs.size();
+    }
+    public float getWeight(int i){
+        return weights.get(i);
+    }
+    public float getBias(){
+        return bias;
+    }
+    public void setBias(float i){
+        bias = i;
+    }
     public void assignWeight(float weight, int index){
         if(index >= weights.size()){
             weights.add(weight);

@@ -1,6 +1,7 @@
 import Neurons.AccessorNeuron;
 import Neurons.InputNeuron;
 import Neurons.NeuralNet;
+import mathematics.Vector;
 
 import java.util.ArrayList;
 
@@ -67,11 +68,10 @@ public class TestNeuron {
         net.addNeuron(h3);
         net.addOutNeuron(o1);
         net.addOutNeuron(o2);
-        ArrayList<Float> input = new ArrayList<Float>();
+        Vector input = new Vector();
         input.add(1f);
         input.add(1f);
         System.out.println("Result 1 (Neural Net): "+net.calculate(input).get(0) + "," + "Result 2 (Neural Net): " + net.calculate(input).get(1));
         System.out.println("Result 1: " + result1 + " Result 2: " + result2 );
-
     }
 }

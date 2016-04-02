@@ -58,4 +58,16 @@ public abstract class Distribution {
         }
     }
 
+    public boolean[] testIndices(double[] testItems){
+        boolean[] results = new boolean[getIndices().size()];
+        for(double d: testItems){
+            for (int j = 0; j< indices.size(); j++){
+                if(indices.get(j).test(d)){
+                    results[j] = true;
+                }
+            }
+        }
+        return results;
+    }
+
 }

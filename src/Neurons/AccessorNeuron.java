@@ -58,11 +58,9 @@ public class AccessorNeuron implements Neuron{
      */
     private Vector getInputValues(){
         Vector toReturn = new Vector();
-        System.out.println("Inputs.size(): " + inputs.size());
         for(Neuron v: inputs){
             toReturn.add(v.compute());
         }
-        System.out.println("toReturn.size: " + toReturn.size());
         return toReturn;
     }
 
@@ -71,8 +69,8 @@ public class AccessorNeuron implements Neuron{
      * @return
      */
     public double compute() {
-        Vector vector = getInputValues();
-        return activation.calculate(vector.dotProduct(weights)+ bias) ;
+        System.out.println("Input Values: " + getInputValues().toString());
+        return activation.calculate(getInputValues().dotProduct(weights)+ bias) ;
     }
 
     public void addNeuron(Neuron n){

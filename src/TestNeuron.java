@@ -12,7 +12,7 @@ public class TestNeuron {
 
     public static void main(String[] args) {
 
-        double threshold = 0;
+        double threshold = 5;
         /*
         InputNeuron i1 = new InputNeuron(1);//A
         InputNeuron i2 = new InputNeuron(1);//B
@@ -93,9 +93,9 @@ public class TestNeuron {
 
 
         Vector input = new Vector();
-        //net.calculate(input);
+
         input.add(1.0);
-        input.add(1.0);
+        input.add(0.0);
         input.add(0.0);
 
         o1.addNeuron(i1);

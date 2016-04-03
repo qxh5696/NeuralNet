@@ -35,17 +35,19 @@ public class TestNeuron {
 
         /////////////MUSE OSC SERVER////////////////////
         //create the server
+        /*
         MuseOSCServer museOSCServer;
         int recvPort = 5000;
         museOSCServer = new MuseOSCServer();
         museOSCServer.museServer = new OscP5(museOSCServer,recvPort);
-
-        int iterations = 10000;
+        */
+        int iterations = 100;
         //create the probability distributions
-        GaussianDistribution g = new GaussianDistribution( 875, 0, 10);
+        GaussianDistribution g = new GaussianDistribution( 1750, 0, 10);
         //the bins
         g.calculateIndices();
-        ArrayList<Double> indicies = new ArrayList<>();
+        double[] fourBuffer = new double[4];
+        //ArrayList<Double> indicies = new ArrayList<>();
         //read data
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("recording.csv")));
@@ -54,9 +56,19 @@ public class TestNeuron {
             while ( (s=bufferedReader.readLine()) != null) {
                 double[] list = Parser.parseLine(s);
                 if(list != null){
-                    for(double d : list){
-                        indicies.add(d);
+                    for(int i = 0; i < list.length; ++i){
+                        fourBuffer[i] = list[i];
                     }
+                    boolean[] values = g.testIndices(fourBuffer);
+                    for(int i = 0; i < values.length; ++i){
+                        if(values[i]){
+                            input.add(1.0);
+                        }else{
+                            input.add(0.0);
+                        }
+                    }
+                    inputs.add(input.copy());
+                    input.clear();
                 }
 
             }
@@ -66,29 +78,34 @@ public class TestNeuron {
             e.printStackTrace();
         }
         //same as indicies
-        double[] newIndicies = new double[indicies.size()];
-        for(int i = 0; i < indicies.size(); ++i){
-            newIndicies[i] = indicies.get(i);
-        }
-        indicies.clear();//give some memory back, though it's probably pointless
-        boolean[] values = g.testIndices(newIndicies);
+        /*
+        boolean[] values = g.testIndices();
         Vector out = new Vector();
-
         for(int i = 0; i < values.length; ++i){
             if(values[i]){
+                //TODO mod by 10
                 input.add(1.0);
-                inputs.add(input.copy());
-                input.clear();
                 continue;
+
+            }else {
+                input.add(0.0);
             }
-            input.add(0.0);
-            inputs.add(input.copy());
-            input.clear();
         }
+        inputs.add(input.copy());
+        input.clear();*/
+
         //TODO Must quantify data into input vectors!
         //System.out.println("Result 1 (Neural Net) before " + iterations + " iterations: "
         //        + net.calculate(input).get(0));
         File f = new File("outputTest");//What i think this will do is overwrite it but I'm not sure
+        expected.add(new Vector());
+        expected.get(0).add(1.);
+        expected.get(0).add(0.);
+        expected.get(0).add(0.);
+        expected.get(0).add(0.);
+        expected.get(0).add(0.);
+        expected.get(0).add(0.);
+
         for(int i = 0; i < iterations; i++) {
             net.update(inputs, expected);
         }

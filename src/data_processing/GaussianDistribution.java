@@ -18,7 +18,8 @@ public class GaussianDistribution extends Distribution {
         double range = (getHighBound()-getLowBound());
         NormalDistribution a = new NormalDistribution(mean,sigma);
         for(double d = getLowBound(); d<getHighBound(); d += step){
-            DistributionIndex distributionIndex = new DistributionIndex(a.inverseCumulativeProbability(d/range),a.inverseCumulativeProbability((d+step)/range));
+            DistributionIndex distributionIndex = new DistributionIndex(a.inverseCumulativeProbability(d/range),
+                    a.inverseCumulativeProbability((d+step)/range));
             this.getIndices().add(distributionIndex);
         }
 

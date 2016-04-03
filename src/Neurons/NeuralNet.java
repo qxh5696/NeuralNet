@@ -50,6 +50,7 @@ public class NeuralNet implements Serializable {
     public Vector calculate(Vector input){
         //set all of the input neurons to the parameters' values
         for(int i = 0; i < in.size(); i++){
+            if(i<input.size())
             in.get(i).setValue(input.get(i));
         }
         //calculate each of the output values

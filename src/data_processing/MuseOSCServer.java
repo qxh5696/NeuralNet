@@ -7,7 +7,6 @@ import oscP5.*;
 
 public class MuseOSCServer {
     static MuseOSCServer museOSCServer;
-
     OscP5 museServer;
     static int recvPort = 5000;
 
@@ -24,4 +23,5 @@ public class MuseOSCServer {
             }
         }
     }
+
 }

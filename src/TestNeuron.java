@@ -248,19 +248,19 @@ public class TestNeuron {
         */
 
         /////////////MUSE OSC SERVER////////////////////
-
+        //create the server
         MuseOSCServer museOSCServer;
         int recvPort = 5000;
         museOSCServer = new MuseOSCServer();
         museOSCServer.museServer = new OscP5(museOSCServer,recvPort);
 
-
         int iterations = 10000;
-
-        //double highBound, double lowBound, int numOfIndices
-        GaussianDistribution g = new GaussianDistribution( 1200, 0, 60);
+        //create the probability distributions
+        GaussianDistribution g = new GaussianDistribution( 875, 0, 10);
+        //the bins
         g.calculateIndices();
         ArrayList<Double> indicies = new ArrayList<>();
+        //read data
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("recording.csv")));
             String s;
@@ -279,6 +279,7 @@ public class TestNeuron {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //same as indicies
         double[] newIndicies = new double[indicies.size()];
         for(int i = 0; i < indicies.size(); ++i){
             newIndicies[i] = indicies.get(i);
@@ -290,8 +291,6 @@ public class TestNeuron {
         for(int i = 0; i < values.length; ++i){
             if(values[i]){
                 input.add(1.0);
-
-
                 inputs.add(input.copy());
                 input.clear();
                 continue;
@@ -299,23 +298,10 @@ public class TestNeuron {
             input.add(0.0);
             inputs.add(input.copy());
             input.clear();
-            //out.add(0.0);
-            //out.add(1.0);
-            //out.add(0.0);
-            //out.add(1.0);
-            //out.add(0.0);
-            //out.add(1.0);
-            expected.add(out.copy());
-            out.clear();
         }
         //TODO Must quantify data into input vectors!
-        for(int i = 0; i < 40; i++) {
-            input.add(0.0);
-            input.add(1.0);
-            input.add(0.0);
-        }
-        System.out.println("Result 1 (Neural Net) before " + iterations + " iterations: "
-                + net.calculate(input).get(0));
+        //System.out.println("Result 1 (Neural Net) before " + iterations + " iterations: "
+        //        + net.calculate(input).get(0));
         File f = new File("outputTest");//What i think this will do is overwrite it but I'm not sure
         for(int i = 0; i < iterations; i++) {
             net.update(inputs, expected);
@@ -331,7 +317,7 @@ public class TestNeuron {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("CHEESE");
 //        //Cheese festival conundrum
 //
 //        InputNeuron i1 = new InputNeuron(1);

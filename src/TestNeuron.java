@@ -41,7 +41,7 @@ public class TestNeuron {
         museOSCServer = new MuseOSCServer();
         museOSCServer.museServer = new OscP5(museOSCServer,recvPort);
         */
-        int iterations = 100;
+        int iterations = 2;
         //create the probability distributions
         GaussianDistribution g = new GaussianDistribution( 1750, 0, 10);
         //the bins
@@ -68,7 +68,34 @@ public class TestNeuron {
                         }
                     }
                     inputs.add(input.copy());
-                    input.clear();
+                    File f = new File("outputTest");//What i think this will do is overwrite it but I'm not sure
+                    expected.add(new Vector());
+                    expected.get(0).add(1.);
+                    expected.get(0).add(0.);
+                    expected.get(0).add(0.);
+                    expected.get(0).add(0.);
+                    expected.get(0).add(0.);
+                    expected.get(0).add(0.);
+                    for(int i = 0; i < iterations; i++) {
+                        net.update(inputs, expected);
+                    }
+//                    try {
+//                        FileOutputStream fout = new FileOutputStream(f);
+//                        ObjectOutputStream oos = new ObjectOutputStream(fout);
+//                        oos.writeObject(net);
+//                        oos.close();
+//                        fout.close();
+//                    } catch (FileNotFoundException e) {
+//                        e.printStackTrace();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    finally {
+                        System.out.println("CHEESE");
+                        System.out.println("Result 2 (Neural Net) after " + iterations + " iterations: " + net.calculate(input).get(0));
+                        inputs.clear();
+                        input.clear();
+                        expected.clear();
                 }
 
             }
@@ -97,31 +124,31 @@ public class TestNeuron {
         //TODO Must quantify data into input vectors!
         //System.out.println("Result 1 (Neural Net) before " + iterations + " iterations: "
         //        + net.calculate(input).get(0));
-        File f = new File("outputTest");//What i think this will do is overwrite it but I'm not sure
-        expected.add(new Vector());
-        expected.get(0).add(1.);
-        expected.get(0).add(0.);
-        expected.get(0).add(0.);
-        expected.get(0).add(0.);
-        expected.get(0).add(0.);
-        expected.get(0).add(0.);
-
-        for(int i = 0; i < iterations; i++) {
-            net.update(inputs, expected);
-        }
-        try {
-            FileOutputStream fout = new FileOutputStream(f);
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
-            oos.writeObject(net);
-            oos.close();
-            fout.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("CHEESE");
-
-        System.out.println("Result 2 (Neural Net) after " + iterations + " iterations: " + net.calculate(input).get(0));
+//        File f = new File("outputTest");//What i think this will do is overwrite it but I'm not sure
+//        expected.add(new Vector());
+//        expected.get(0).add(1.);
+//        expected.get(0).add(0.);
+//        expected.get(0).add(0.);
+//        expected.get(0).add(0.);
+//        expected.get(0).add(0.);
+//        expected.get(0).add(0.);
+//
+//        for(int i = 0; i < iterations; i++) {
+//            net.update(inputs, expected);
+//        }
+//        try {
+//            FileOutputStream fout = new FileOutputStream(f);
+//            ObjectOutputStream oos = new ObjectOutputStream(fout);
+//            oos.writeObject(net);
+//            oos.close();
+//            fout.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("CHEESE");
+//
+//        System.out.println("Result 2 (Neural Net) after " + iterations + " iterations: " + net.calculate(input).get(0));
     }
 }

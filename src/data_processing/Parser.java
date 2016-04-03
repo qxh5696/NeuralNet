@@ -22,12 +22,12 @@ public class Parser {
             String s;
             while ( (s=bufferedReader.readLine()) != null){
                 double[] list = parseLine(s);
-                if (list!= null){
+                /*if (list!= null){
                     for (double d: list){
                         System.out.printf("%15.5f ", d);
                     }
                     System.out.printf("\n");
-                }
+                }*/
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

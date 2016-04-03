@@ -8,12 +8,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
 import oscP5.*;
 
-import data_processing.*;
+import data_processing.MuseOSCServer;
+import data_processing.GaussianDistribution;
+import data_processing.Parser;
 import views.*;
 
 /**
@@ -36,14 +39,18 @@ public class TestNeuron {
         ArrayList<Vector> expected = new ArrayList<>();
 
         /////////////MUSE OSC SERVER////////////////////
-        //create the server
-        /*
+        //create the server/
+
+
         MuseOSCServer museOSCServer;
         int recvPort = 5000;
         museOSCServer = new MuseOSCServer();
         museOSCServer.museServer = new OscP5(museOSCServer,recvPort);
-        */
-        int iterations = 2;
+
+
+        int iterations = 1000;
+
+
         //create the probability distributions
         GaussianDistribution g = new GaussianDistribution( 1750, 0, 10);
         //the bins
@@ -52,9 +59,13 @@ public class TestNeuron {
         //ArrayList<Double> indicies = new ArrayList<>();
         //read data
         try {
-            InetAddress serverAddr = InetAddress.getByName("127.0.0.1");
-            Socket clientSocket = new Socket(serverAddr, 5000);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+            //InetAddress serverAddr = InetAddress.getByName("127.0.0.1");
+//            Socket clientSocket = new Socket("127.0.0.1", 5000);
+            ServerSocket serverSocket = new ServerSocket(5000);
+            Socket clientSocket = serverSocket.accept();
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(clientSocket.getInputStream()));
             String s;
 
             while ( (s=bufferedReader.readLine()) != null) {
@@ -108,6 +119,7 @@ public class TestNeuron {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         //same as indicies
         /*
         boolean[] values = g.testIndices();
@@ -124,8 +136,6 @@ public class TestNeuron {
         }
         inputs.add(input.copy());
         input.clear();*/
-
-        //TODO Must quantify data into input vectors!
         //System.out.println("Result 1 (Neural Net) before " + iterations + " iterations: "
         //        + net.calculate(input).get(0));
 //        File f = new File("outputTest");//What i think this will do is overwrite it but I'm not sure

@@ -7,7 +7,7 @@ import oscP5.*;
 
 public class MuseOSCServer {
     static MuseOSCServer museOSCServer;
-    OscP5 museServer;
+    public OscP5 museServer;
     static int recvPort = 5000;
 
     public static void main(String[] args) {

@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import oscP5.*;
@@ -50,7 +52,9 @@ public class TestNeuron {
         //ArrayList<Double> indicies = new ArrayList<>();
         //read data
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("recording.csv")));
+            InetAddress serverAddr = InetAddress.getByName("127.0.0.1");
+            Socket clientSocket = new Socket(serverAddr, 5000);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String s;
 
             while ( (s=bufferedReader.readLine()) != null) {

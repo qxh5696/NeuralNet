@@ -299,12 +299,12 @@ public class TestNeuron {
             input.add(0.0);
             inputs.add(input.copy());
             input.clear();
-            out.add(0.0);
-            out.add(1.0);
-            out.add(0.0);
-            out.add(1.0);
-            out.add(0.0);
-            out.add(1.0);
+            //out.add(0.0);
+            //out.add(1.0);
+            //out.add(0.0);
+            //out.add(1.0);
+            //out.add(0.0);
+            //out.add(1.0);
             expected.add(out.copy());
             out.clear();
         }

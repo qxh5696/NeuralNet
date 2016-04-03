@@ -10,6 +10,15 @@ import java.util.ArrayList;
  * Vector implementation
  */
 public class Vector extends ArrayList<Double> {
+
+
+    public Vector(double ... doubles){
+        double[] someDoubles = doubles;
+        for(double d : doubles)
+            this.add(d);
+    }
+
+
     /**
      * Computes the dot product between two vectors
      * @param v vector one

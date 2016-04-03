@@ -3,6 +3,7 @@ package data_processing;
 /**
  * Created by Aaron on 4/2/2016.
  */
+import netP5.NetAddress;
 import oscP5.*;
 
 import java.util.Objects;
@@ -13,7 +14,9 @@ public class MuseOSCServer {
     static MuseOSCServer museOSCServer;
     public OscP5 museServer;
     static int recvPort = 5000;
+    public MuseOSCServer(){
 
+    }
 
     public static void main(String[] args) {
         museOSCServer = new MuseOSCServer();
@@ -38,6 +41,8 @@ public class MuseOSCServer {
 
             }
         });
+        NetAddress netAddress = new NetAddress("127.0.0.1", 5000);
+        //museOSCServer.museServer.connect(netAddress, null, null);
     }
 
 

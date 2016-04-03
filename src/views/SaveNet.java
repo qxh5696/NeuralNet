@@ -115,7 +115,7 @@ import oscP5.OscStatus;
     ArrayList<Vector> inputList = new ArrayList<>();
     NeuralNet net = new NeuralNet();
     public void recording(ArrayList<Vector> expected){
-        net = ReadNet.getNet("database");
+        net = ReadNet2.getNet("database");
         System.out.println("a");
         String file = "database";
         Vector input = new Vector();
